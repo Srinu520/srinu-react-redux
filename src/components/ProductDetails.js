@@ -10,7 +10,12 @@ function ProductDetails(props) {
     loadProduct(id)
   }, [])
   if(loading) {
-    return <div>Loading...</div>
+    return (
+      <div className="loader w-100" type="button" disabled>
+        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        Loading...
+      </div>
+    )
   }
   return (
     <div>
@@ -19,13 +24,13 @@ function ProductDetails(props) {
           <div className="container">
             <div className="row p-5">
               <div className="col-md-4 col-12">
-                <img src={`https://picsum.photos/400/600?random=${selectedProduct.id}`} alt="..." />
+                <img className='img-fluid w-sm-100' src={`https://picsum.photos/400/600?random=${selectedProduct.id}`} alt="..." />
               </div>
               <div className="col-md-8 col-12 p-5">
                 <div className="card-body">
                   <h5 className="card-title">{selectedProduct.name}</h5>
-                  <p className="card-text">{selectedProduct.price}</p>
-                  <p className="card-text">{selectedProduct.description}</p>
+                  <p className="card-text text-success">{selectedProduct.price}</p>
+                  <p className="card-text text-secoundary">{selectedProduct.description}</p>
                 </div>
               </div>
             </div>
@@ -39,7 +44,7 @@ function ProductDetails(props) {
 const mapStateToProps = (state) => {
   return {
     selectedProduct: state.products.selectedProduct,
-    loading: state.products.loading,
+    loading: state.loading.effects.products.loadProduct,
   }
 }
 const mapDispatchToProps = (dispatch) => {

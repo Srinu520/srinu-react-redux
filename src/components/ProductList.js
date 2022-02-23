@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 
 function ProductsList (props) {
-  const { products, categories, loadProducts, loadCategories } = props
+  const { products, categories, loadProducts, loadCategories, loading, productsLoading } = props
   const [category, setCategory ] = useState('all')
   const [filteredProducts, setFilteredProducts] = useState([])
   const navigate = useNavigate()
@@ -20,7 +20,21 @@ function ProductsList (props) {
       setFilteredProducts(products.map(product => product.categoryId == category? product : null).filter(product => product != null))
     }
   }, [category, products])
-  
+  if(loading) {
+    return (
+      <button class="loader w-100" type="button" disabled>
+        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        Loading...
+      </button>
+    )
+  } else if (productsLoading) {
+    return (
+      <button class="loader w-100" type="button" disabled>
+        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        Loading products...
+      </button>
+    )
+  }
   return (
     <div className="container">
       <div className='p-5'>
@@ -42,9 +56,9 @@ function ProductsList (props) {
                 <div className="card mb-4 shadow-sm">
                   <img src={`https://picsum.photos/200/300?random=${index}`} className="card-img-top"/>
                   <div className="card-body">
-                    <Link to={`/${product.id}`}><p className="card-text">{product.name}</p></Link>
-                    <p className="card-text">{product.model}</p>
-                    <p className="card-text">{product.price}</p>
+                    <Link to={`/${product.id}`} className='App-link'><p className="card-text">{product.name}</p></Link>
+                    <p className="card-text text-secoundary">{product.model}</p>
+                    <p className="card-text text-success">{product.price}</p>
                   </div>
                 </div>
               </div>

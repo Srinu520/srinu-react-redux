@@ -4,7 +4,9 @@ import ProductsList from './ProductList'
 const mapStateToProps = (state) => {
   return {
     products: state.products.products,
-    categories: state.products.categories
+    categories: state.products.categories,
+    loading: state.loading.global,
+    productsLoading: state.loading.effects.products.loadProducts,
   }
 }
 const mapDispatchToProps = (dispatch) => {

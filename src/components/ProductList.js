@@ -53,14 +53,16 @@ function ProductsList (props) {
           filteredProducts?.map((product, index) => {
             return (
               <div className="col-md-4 col-12" key={product.id}>
+                <Link to={`/${product.id}`} className='App-link'>
                 <div className="card mb-4 shadow-sm">
                   <img src={`https://picsum.photos/200/300?random=${index}`} className="card-img-top"/>
                   <div className="card-body">
-                    <Link to={`/${product.id}`} className='App-link'><p className="card-text">{product.name}</p></Link>
-                    <p className="card-text text-secoundary">{product.model}</p>
+                    <p className="card-text App-link">{product.name}</p>
+                    <p className="card-text text-gray">{product.model}</p>
                     <p className="card-text text-success">{product.price}</p>
                   </div>
                 </div>
+                </Link>
               </div>
             )
           })

@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 function ProductsList (props) {
   const { products, categories, loadProducts, loadCategories, loading, productsLoading } = props
   const [category, setCategory ] = useState('all')
   const [filteredProducts, setFilteredProducts] = useState([])
-  const navigate = useNavigate()
   useEffect(() => {
     loadProducts()
     loadCategories()
-  }, [])
+  })
   console.log('products', products)
   useEffect(() => {
     if (category === 'all') {
       console.log('all', products)
       setFilteredProducts(products)
     } else {
-      setFilteredProducts(products.map(product => product.categoryId == category? product : null).filter(product => product != null))
+      setFilteredProducts(products.map(product => product.categoryId === category? product : null).filter(product => product != null))
     }
   }, [category, products])
   if(loading) {

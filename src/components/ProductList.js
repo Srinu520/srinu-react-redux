@@ -35,11 +35,16 @@ function ProductsList (props) {
       </button>
     )
   }
+  const changeHandler = (e) => {
+    const { value } = e.target
+    setFilteredProducts(products.map(product => product.name.toLowerCase().includes(value.toLowerCase())? product : null).filter(product => product != null))
+  }
   return (
     <div className="container">
-      <div className='p-5'>
+      <div className='p-5 d-flex flex-column w-25 m-auto'>
+        <section>
         <label className='p-3'> Sleclect Category </label>
-        <select onChange={(e) => setCategory(e.target.value)} style={{width: '6rem'}}>
+        <select onChange={(e) => setCategory(e.target.value)} className='w-100 p-1'>
           <option value="all">All</option>
           {
             categories.map(category => (
@@ -47,6 +52,8 @@ function ProductsList (props) {
             ))
           }
         </select>
+        </section>
+        <input type="text" placeholder="Search" onChange={changeHandler} className='w-100 mt-2'/>
       </div>
       <div className="row">
         {
@@ -66,6 +73,15 @@ function ProductsList (props) {
               </div>
             )
           })
+        }{
+          filteredProducts?.length === 0 &&
+          <div className="col-md-4 col-12 m-auto">
+            <div className="card mb-4 shadow-sm">
+              <div className="card-body">
+                <p className="card-text">No products found</p>
+              </div>
+            </div>
+          </div>
         }
       </div>
     </div>

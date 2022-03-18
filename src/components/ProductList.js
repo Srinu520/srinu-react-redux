@@ -9,11 +9,10 @@ function ProductsList (props) {
   useEffect(() => {
     loadProducts()
     loadCategories()
-  })
+  },[])
   console.log('products', products)
   useEffect(() => {
     if (category === 'all') {
-      console.log('all', products)
       setFilteredProducts(products)
     } else {
       setFilteredProducts(products.map(product => product.categoryId === category? product : null).filter(product => product != null))

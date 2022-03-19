@@ -12,7 +12,7 @@ function ProductDetails(props) {
   if(loading) {
     return (
       <div className="loader w-100" type="button" disabled>
-        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        <span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
         Loading...
       </div>
     )

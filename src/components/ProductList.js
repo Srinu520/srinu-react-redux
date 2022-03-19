@@ -10,25 +10,24 @@ function ProductsList (props) {
     loadProducts()
     loadCategories()
   },[])
-  console.log('products', products)
   useEffect(() => {
     if (category === 'all') {
       setFilteredProducts(products)
     } else {
-      setFilteredProducts(products.map(product => product.categoryId === category? product : null).filter(product => product != null))
+      setFilteredProducts(products.map(product => product.categoryId == category? product : null).filter(product => product != null))
     }
   }, [category, products])
   if(loading) {
     return (
-      <button class="loader w-100" type="button" disabled>
-        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+      <button className="loader w-100" type="button" disabled>
+        <span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
         Loading...
       </button>
     )
   } else if (productsLoading) {
     return (
-      <button class="loader w-100" type="button" disabled>
-        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+      <button className="loader w-100" type="button" disabled>
+        <span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
         Loading products...
       </button>
     )
